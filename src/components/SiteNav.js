@@ -4,8 +4,8 @@ import "./siteNav.scss";
 
 function curPathStyle() {
   let exchStyle, histStyle, aboutStyle;
-  let bold = { fontWeight: "bold" };
-  let location = window.location.hash;
+  const bold = { fontWeight: "bold" };
+  const location = window.location.hash;
   if (
     location === "#/" ||
     location === "#/exchanges" ||
