@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { markdownToHTML } from "../utils";
+import markdownToHTML from "../utils/markdown";
 import ReadMe from "../../../README.md";
 
 const About = () => {

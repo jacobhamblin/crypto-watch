@@ -3,3 +3,4 @@ repos:
     rev: 1.16.4
     hooks:
       - id: prettier
+        exclude_types: [sass, scss]
