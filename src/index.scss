@@ -1,0 +1,42 @@
+@import "reset.scss";
+@import url(
+  https://fonts.googleapis.com/css?family=Open+Sans:400,
+  300,
+  600,
+  700
+);
+
+body {
+  margin: 0;
+  font-family: "Open Sans", Helvetica, Arial;
+  background-color: #f7f7f7;
+  color: #333;
+
+  a {
+    text-decoration: none;
+  }
+
+  #root {
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    background-color: #fff;
+    padding: 36px;
+
+    .app {
+      footer {
+        text-align: center;
+        margin-top: 36px;
+
+        svg {
+          fill: #777;
+
+          &:hover {
+            fill: #000;
+          }
+        }
+      }
+    }
+  }
+}

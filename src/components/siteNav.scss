@@ -1,0 +1,16 @@
+nav.siteNav {
+  ul {
+    margin: 0;
+    border-bottom: 4px solid #f7f7f7;
+    text-align: right;
+
+    li {
+      display: inline-block;
+      padding: 12px;
+
+      a {
+        color: #333;
+      }
+    }
+  }
+}
