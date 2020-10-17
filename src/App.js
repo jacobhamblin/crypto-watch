@@ -23,7 +23,7 @@ function App() {
         </Switch>
 
         <footer>
-          <a href="https://github.com/jacobhamblin/BTC-charts">
+          <a href="https://github.com/jacobhamblin/crypto-watch">
             <svg
               aria-hidden="true"
               className="octicon octicon-mark-github"
