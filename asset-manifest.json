@@ -1,24 +1,24 @@
 {
   "files": {
     "main.css": "/crypto-watch/static/css/main.00d198cb.chunk.css",
-    "main.js": "/crypto-watch/static/js/main.870d9bd8.chunk.js",
-    "main.js.map": "/crypto-watch/static/js/main.870d9bd8.chunk.js.map",
+    "main.js": "/crypto-watch/static/js/main.116d1faf.chunk.js",
+    "main.js.map": "/crypto-watch/static/js/main.116d1faf.chunk.js.map",
     "runtime-main.js": "/crypto-watch/static/js/runtime-main.97ac54b8.js",
     "runtime-main.js.map": "/crypto-watch/static/js/runtime-main.97ac54b8.js.map",
     "static/js/2.2708d0f7.chunk.js": "/crypto-watch/static/js/2.2708d0f7.chunk.js",
     "static/js/2.2708d0f7.chunk.js.map": "/crypto-watch/static/js/2.2708d0f7.chunk.js.map",
     "index.html": "/crypto-watch/index.html",
-    "precache-manifest.dd5de9a3d067d87af4d6c23ac567a79d.js": "/crypto-watch/precache-manifest.dd5de9a3d067d87af4d6c23ac567a79d.js",
+    "precache-manifest.e19ed8fbd117e9c099137e2b10160571.js": "/crypto-watch/precache-manifest.e19ed8fbd117e9c099137e2b10160571.js",
     "service-worker.js": "/crypto-watch/service-worker.js",
     "static/css/main.00d198cb.chunk.css.map": "/crypto-watch/static/css/main.00d198cb.chunk.css.map",
     "static/js/2.2708d0f7.chunk.js.LICENSE.txt": "/crypto-watch/static/js/2.2708d0f7.chunk.js.LICENSE.txt",
-    "static/js/main.870d9bd8.chunk.js.LICENSE.txt": "/crypto-watch/static/js/main.870d9bd8.chunk.js.LICENSE.txt",
+    "static/js/main.116d1faf.chunk.js.LICENSE.txt": "/crypto-watch/static/js/main.116d1faf.chunk.js.LICENSE.txt",
     "static/media/About.md": "/crypto-watch/static/media/About.b45200b5.md"
   },
   "entrypoints": [
     "static/js/runtime-main.97ac54b8.js",
     "static/js/2.2708d0f7.chunk.js",
     "static/css/main.00d198cb.chunk.css",
-    "static/js/main.870d9bd8.chunk.js"
+    "static/js/main.116d1faf.chunk.js"
   ]
 }
