@@ -3,8 +3,6 @@ import ReactMarkdown from "react-markdown";
 
 import markdownPath from "./About.md";
 
-require("dotenv").config();
-
 const About = () => {
   const [markdown, setMarkdown] = useState("");
   useEffect(() => {
@@ -13,7 +11,7 @@ const About = () => {
       .then(text => setMarkdown(text));
   }, []);
 
-  console.log(process.env.COINMARKETCAP_KEY);
+  console.log(process.env.REACT_APP_COINMARKETCAP_KEY);
   return <ReactMarkdown source={markdown} />;
 };
 
