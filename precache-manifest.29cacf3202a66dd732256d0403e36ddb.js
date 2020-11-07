@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ea84216d5f41428c41740b8d16dbfd22",
+    "revision": "53b8e44a4cea70d8fe2d558e7a10cd79",
     "url": "/crypto-watch/index.html"
   },
   {
-    "revision": "f53bf4629e4587447a30",
+    "revision": "4938448d6bbfb56c15d0",
     "url": "/crypto-watch/static/css/main.00d198cb.chunk.css"
   },
   {
@@ -16,12 +16,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/crypto-watch/static/js/2.2708d0f7.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "f53bf4629e4587447a30",
-    "url": "/crypto-watch/static/js/main.116d1faf.chunk.js"
+    "revision": "4938448d6bbfb56c15d0",
+    "url": "/crypto-watch/static/js/main.0083efb7.chunk.js"
   },
   {
     "revision": "826cdc577f539df2ab0528860b5cb97e",
-    "url": "/crypto-watch/static/js/main.116d1faf.chunk.js.LICENSE.txt"
+    "url": "/crypto-watch/static/js/main.0083efb7.chunk.js.LICENSE.txt"
   },
   {
     "revision": "00c6b74df779c9d435f5",
