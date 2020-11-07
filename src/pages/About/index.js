@@ -11,7 +11,6 @@ const About = () => {
       .then(text => setMarkdown(text));
   }, []);
 
-  console.log(process.env.REACT_APP_COINMARKETCAP_KEY);
   return <ReactMarkdown source={markdown} />;
 };
 

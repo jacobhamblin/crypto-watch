@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import About from "./pages/About";
+import Cryptocurrency from "./pages/Cryptocurrency";
 import NoMatch from "./NoMatch.js";
 import SiteNav from "./components/SiteNav";
 
@@ -17,8 +18,11 @@ function App() {
           <Route path="/about">
             <About />
           </Route>
+          <Route path="/cryptocurrency">
+            <Cryptocurrency />
+          </Route>
           <Route path="/">
-            <About />
+            <Cryptocurrency />
           </Route>
         </Switch>
 
