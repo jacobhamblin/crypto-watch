@@ -8,14 +8,16 @@ const Cryptocurrency = ({}) => {
     return response.json();
   }
   useEffect(() => {
-    getData(
-      "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest",
-      {
-        headers: {
-          "X-CMC_PRO_API_KEY": process.env.REACT_APP_COINMARKETCAP_KEY
-        }
+    const url =
+      "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=5000&convert=USD";
+    const fetchParams = {
+      headers: {
+        "X-CMC_PRO_API_KEY": process.env.REACT_APP_COINMARKETCAP_KEY
       }
-    ).then(data => setAPIData(data));
+    };
+    fetch(url, fetchParams)
+      .then(res => res.json())
+      .then(res => setAPIData(res));
   }, []);
 
   console.log(APIData);
