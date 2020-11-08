@@ -3,33 +3,29 @@ import { Link } from "react-router-dom";
 import "./siteNav.scss";
 
 function curPathStyle() {
-  let exchStyle, histStyle, aboutStyle;
+  let hist, crypto, about;
   const bold = { fontWeight: "bold" };
-  const location = window.location.hash;
-  if (
-    location === "#/" ||
-    location === "#/exchanges" ||
-    location === "#/exchanges/"
-  ) {
-    exchStyle = bold;
-  } else if (location === "#/history" || location === "#/history/") {
-    histStyle = bold;
-  } else if (location === "#/about" || location === "#/about/") {
-    aboutStyle = bold;
+  const location = window.location.href;
+  hist = bold;
+  if (location.includes('cryptocurrency')) {
+    crypto = bold;
+  } else if (location.includes('about')) {
+    about = bold;
   }
 
-  return { exchStyle, histStyle, aboutStyle };
+  return { hist, crypto, about };
 }
 
 const SiteNav = () => {
-  const { exchStyle, histStyle, aboutStyle } = curPathStyle();
+  const { hist, crypto, about } = curPathStyle();
 
-  // <li style={exchStyle}><Link to='/exchanges'>Exchanges</Link></li>
-  // <li style={histStyle}><Link to='/history'>History</Link></li>
   return (
     <nav className="siteNav">
       <ul>
-        <li style={aboutStyle}>
+        <li style={hist}>
+          <Link to="/btchistory">History</Link>
+        </li>
+        <li style={about}>
           <Link to="/about">About</Link>
         </li>
       </ul>

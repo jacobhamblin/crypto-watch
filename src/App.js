@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import About from "./pages/About";
 import Cryptocurrency from "./pages/Cryptocurrency";
+import BTCHistory from "./pages/BTCHistory";
 import NoMatch from "./NoMatch.js";
 import SiteNav from "./components/SiteNav";
 
@@ -17,6 +18,9 @@ function App() {
         <Switch>
           <Route path="/about">
             <About />
+          </Route>
+          <Route path="/btchistory">
+            <BTCHistory />
           </Route>
           <Route path="/cryptocurrency">
             <Cryptocurrency />
