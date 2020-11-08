@@ -10,7 +10,7 @@ import SiteNav from "./components/SiteNav";
 function App() {
   return (
     <div className="app">
-      <Router>
+      <Router basename={process.env.REACT_APP_URL_BASENAME}>
         <header>
           <SiteNav />
         </header>
@@ -26,7 +26,7 @@ function App() {
             <Cryptocurrency />
           </Route>
           <Route path="/">
-            <Cryptocurrency />
+            <BTCHistory />
           </Route>
         </Switch>
 
