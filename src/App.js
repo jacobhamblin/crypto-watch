@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import About from "./pages/About";
-import Cryptocurrency from "./pages/Cryptocurrency";
+import Markets from "./pages/Cryptocurrency";
 import BTCHistory from "./pages/BTCHistory";
 import NoMatch from "./NoMatch.js";
 import SiteNav from "./components/SiteNav";
@@ -22,8 +22,8 @@ function App() {
           <Route path="/btchistory">
             <BTCHistory />
           </Route>
-          <Route path="/cryptocurrency">
-            <Cryptocurrency />
+          <Route path="/markets">
+            <Markets />
           </Route>
           <Route path="/">
             <BTCHistory />

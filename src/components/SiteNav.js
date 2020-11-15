@@ -7,7 +7,7 @@ function curPathStyle() {
   const bold = { fontWeight: "bold" };
   const location = window.location.href;
   hist = bold;
-  if (location.includes('cryptocurrency')) {
+  if (location.includes('markets')) {
     crypto = bold;
   } else if (location.includes('about')) {
     about = bold;
@@ -24,6 +24,9 @@ const SiteNav = () => {
       <ul>
         <li style={hist}>
           <Link to="/btchistory">History</Link>
+        </li>
+        <li style={crypto}>
+          <Link to="/markets">Markets</Link>
         </li>
         <li style={about}>
           <Link to="/about">About</Link>
