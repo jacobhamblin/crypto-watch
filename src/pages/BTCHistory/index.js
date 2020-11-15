@@ -40,7 +40,7 @@ const BTCHistory = () => {
       zoomType: 'x'
     },
     title: {
-      text: 'BTC price since 2013',
+      text: '(fake) BTC price since 2013 (until I fix dataset)',
     },
     xAxis: {
       type: 'datetime',
