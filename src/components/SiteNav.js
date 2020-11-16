@@ -1,16 +1,19 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router";
 import "./siteNav.scss";
 
 function curPathStyle() {
+  console.log('checking cur path style again')
   let hist, crypto, about;
   const bold = { fontWeight: "bold" };
   const location = window.location.href;
-  hist = bold;
   if (location.includes('markets')) {
     crypto = bold;
   } else if (location.includes('about')) {
     about = bold;
+  } else {
+    hist = bold;
   }
 
   return { hist, crypto, about };
@@ -36,4 +39,4 @@ const SiteNav = () => {
   );
 };
 
-export default SiteNav;
+export default withRouter(SiteNav);
