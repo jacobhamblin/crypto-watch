@@ -31,6 +31,23 @@ body {
           }
         }
       }
+
+      .coinTabs {
+        text-align: center;
+        list-style-type: none;
+        padding-left: 0;
+
+        li {
+          display: inline-block;
+          padding: 12px;
+          cursor: pointer;
+          min-width: 50px;
+
+          &.selected {
+            font-weight: bold;
+          }
+        }
+      }
     }
   }
 }
