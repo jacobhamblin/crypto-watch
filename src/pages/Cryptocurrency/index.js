@@ -16,33 +16,63 @@ const Cryptocurrency = ({}) => {
   const coinName = pair => pair.match(/(\w+)\/USD/)[1];
 
   const setupCoinList = () => {
-    const coins = data.map(coin => coinName(coin[0].pair));
-    setCoins(coins);
-    setSelectedCoin(coins[0]);
+    const coinsList = data.map(coin => coinName(coin[0].pair));
+    setCoins(coinsList);
+    setSelectedCoin(coinsList[0]);
   };
 
   const setupExchangesList = () => {
-    const newExchangeStats = {};
     const unrecordedExchanges = [];
-    data.forEach(marketsInfo => {
-      marketsInfo.forEach(market => {
-        if (!exchanges.has(market.exchange_id))
-          unrecordedExchanges.push(market.exchange_id);
-        newExchangeStats[coinName(market.pair)] = {
-          volume: market.quotes?.USD?.volume_24h,
-          price: market.quotes?.USD?.price
-        };
+    data.forEach(coin => {
+      coin.forEach(exchange => {
+        if (!exchanges.has(exchange.exchange_id))
+          unrecordedExchanges.push(exchange.exchange_id);
       });
     });
     setExchanges([...exchanges, ...unrecordedExchanges]);
+  };
+
+  const addInfoToExchanges = () => {
+    const newExchangeStats = {};
+    data.forEach(coin => {
+      coin.forEach(exchange => {
+        const exchangeInfo = newExchangeStats[exchange.exchange_id] || {};
+        exchangeInfo[coinName(exchange.pair)] = {
+          volume: exchange.quotes?.USD?.volume_24h,
+          price: exchange.quotes?.USD?.price
+        };
+        newExchangeStats[exchange.exchange_id] = exchangeInfo;
+      });
+    });
     setExchangeStats(newExchangeStats);
-    console.log(newExchangeStats);
   };
 
   if (!coins.length && data.length) {
     setupCoinList();
     setupExchangesList();
+    addInfoToExchanges();
   }
+
+  const stats = [];
+  exchanges.forEach(exchange => {
+    const volume =
+      exchangeStats[exchange] &&
+      exchangeStats[exchange][selectedCoin] &&
+      exchangeStats[exchange][selectedCoin].volume;
+    const price =
+      exchangeStats[exchange] &&
+      exchangeStats[exchange][selectedCoin] &&
+      exchangeStats[exchange][selectedCoin].price;
+    if (volume || price) {
+      stats.push(
+        <div>
+          <div>{exchange}</div>
+          <div>Volume: {volume}</div>
+          <div>Price: {price}</div>
+        </div>
+      );
+    }
+  });
 
   return isLoading ? (
     <div>
@@ -61,6 +91,10 @@ const Cryptocurrency = ({}) => {
           </li>
         ))}
       </ul>
+      <div>
+        <h1>Some stats for now</h1>
+        {stats}
+      </div>
     </div>
   );
 };
