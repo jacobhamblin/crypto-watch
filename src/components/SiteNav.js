@@ -4,7 +4,6 @@ import { withRouter } from "react-router";
 import "./siteNav.scss";
 
 function curPathStyle() {
-  console.log('checking cur path style again')
   let hist, crypto, about;
   const bold = { fontWeight: "bold" };
   const location = window.location.href;
