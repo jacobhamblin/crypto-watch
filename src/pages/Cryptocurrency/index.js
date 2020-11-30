@@ -3,7 +3,7 @@ import HighchartsReact from "highcharts-react-official";
 
 import LoadingPie from "../../components/LoadingPie";
 import useCoinData from "./useCoinData";
-import colors from "../../utils/colors"
+import colors from "../../utils/colors";
 
 const Cryptocurrency = ({}) => {
   const { data, isError, isLoading } = useCoinData();
@@ -37,23 +37,22 @@ const Cryptocurrency = ({}) => {
     let i = 0;
     const newExchangeStats = {};
     data.forEach(coin => {
+      let totalVolume = 0;
       coin.forEach(exchange => {
+        totalVolume += exchange.quotes?.USD?.volume_24h;
         const exchangeInfo = newExchangeStats[exchange.exchange_id] || {};
         exchangeInfo[coinName(exchange.pair)] = {
           volume: exchange.quotes?.USD?.volume_24h,
           price: exchange.quotes?.USD?.price,
-          color: colors[i++],
+          color: colors[i++]
         };
         newExchangeStats[exchange.exchange_id] = exchangeInfo;
       });
-    });
-    const reducer = (memo, key) => memo + newExchangeStats[key].volume;
-    const keys = Object.keys(newExchangeStats);
-    const totalVolume = keys.reduce(reducer);
-    keys.forEach(key => {
-      const percentage = totalVolume / newExchangeStats[key].volume;
-      console.log(`totalVolume: ${totalVolume} - my volume ${newExchangeStats[key].volume} - percentage ${percentage}`)
-      newExchangeStats[key].volumePercentage = totalVolume / newExchangeStats[key].volume
+      coins.forEach(exchange => {
+        const coinInfo =
+          newExchangeStats[exchange.exchange_id][coinName(exchange.pair)];
+        coinInfo.volumePercentage = totalVolume / coinInfo.volume;
+      });
     });
     setExchangeStats(newExchangeStats);
   };
