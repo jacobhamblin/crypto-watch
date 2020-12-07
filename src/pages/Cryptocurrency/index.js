@@ -48,10 +48,10 @@ const Cryptocurrency = ({}) => {
         };
         newExchangeStats[exchange.exchange_id] = exchangeInfo;
       });
-      coins.forEach(exchange => {
+      coin.forEach(exchange => {
         const coinInfo =
           newExchangeStats[exchange.exchange_id][coinName(exchange.pair)];
-        coinInfo.volumePercentage = totalVolume / coinInfo.volume;
+        coinInfo.volumePercentage = coinInfo.volume / totalVolume;
       });
     });
     setExchangeStats(newExchangeStats);
