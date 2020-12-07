@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import HighchartsReact from "highcharts-react-official";
 
 import LoadingPie from "../../components/LoadingPie";
+import VolumePie from "./VolumePie";
 import useCoinData from "./useCoinData";
 import colors from "../../utils/colors";
 
@@ -11,6 +12,7 @@ const Cryptocurrency = ({}) => {
 
   const [coins, setCoins] = useState([]);
   const [selectedCoin, setSelectedCoin] = useState("");
+  const [selectedExchange, setSelectedExchange] = useState([]);
   const [exchanges, setExchanges] = useState(new Set());
   const [exchangeStats, setExchangeStats] = useState({});
 
@@ -30,7 +32,9 @@ const Cryptocurrency = ({}) => {
           unrecordedExchanges.push(exchange.exchange_id);
       });
     });
-    setExchanges([...exchanges, ...unrecordedExchanges]);
+    const exchangesSet = new Set([...exchanges, ...unrecordedExchanges]);
+    setExchanges(exchangesSet);
+    return exchangesSet;
   };
 
   const addInfoToExchanges = () => {
@@ -55,12 +59,38 @@ const Cryptocurrency = ({}) => {
       });
     });
     setExchangeStats(newExchangeStats);
+    return newExchangeStats;
   };
 
+  const prepPieChartData = (exchangesSet, newExchangeStats) => {
+    let data = [...exchangesSet];
+    console.log("exchangessss");
+    console.log(exchangesSet);
+    const thing = data.map(exchange => {
+      console.log(exchange);
+      console.log(newExchangeStats);
+      console.log(newExchangeStats[exchange]);
+      return {
+        name: exchange,
+        y: parseFloat(
+          (newExchangeStats[exchange][selectedCoin] * 100).toFixed(2)
+        ),
+        color: newExchangeStats[exchange][selectedCoin]["color"]
+      };
+    });
+    console.log("data");
+    console.log(thing);
+    return thing;
+  };
+
+  let pieData;
   if (!coins.length && data.length) {
     setupCoinList();
-    setupExchangesList();
-    addInfoToExchanges();
+    const exchangesSet = setupExchangesList();
+    const newExchangeStats = addInfoToExchanges();
+    pieData = prepPieChartData(exchangesSet, newExchangeStats);
+    console.log("piedata");
+    console.log(pieData);
   }
 
   const stats = [];
@@ -89,6 +119,8 @@ const Cryptocurrency = ({}) => {
     }
   });
 
+  console.log(pieData);
+
   return isLoading ? (
     <div>
       Compiling data from APIs...
@@ -107,8 +139,7 @@ const Cryptocurrency = ({}) => {
         ))}
       </ul>
       <div>
-        <h1>Some stats for now</h1>
-        {stats}
+        <VolumePie data={pieData} selectExchange={setSelectedExchange} />
       </div>
     </div>
   );
