@@ -13,9 +13,7 @@ export default ({ data, selectExchange }) => {
       plotShadow: false,
       type: "pie"
     },
-    title: {
-      text: "Exchange Volume"
-    },
+    title: { text: "" },
     plotOptions: {
       pie: {
         shadow: false,
@@ -28,11 +26,8 @@ export default ({ data, selectExchange }) => {
         },
         events: {
           click: function(event) {
-            console.log(this);
-            console.log("name");
-            console.log(this.name);
-            console.log(event);
-            selectExchange(this.name);
+            event.preventDefault();
+            if (event.point?.name) selectExchange(event.point.name);
           }
         }
       }
@@ -56,9 +51,13 @@ export default ({ data, selectExchange }) => {
     ]
   };
 
-  return Object.keys(data).length ? (
-    <HighchartsReact options={options} highcharts={Highcharts} />
-  ) : (
-    <LoadingPie />
+  return (
+    <div className="pieContainer">
+      {Object.keys(data).length ? (
+        <HighchartsReact options={options} highcharts={Highcharts} />
+      ) : (
+        <LoadingPie />
+      )}
+    </div>
   );
 };

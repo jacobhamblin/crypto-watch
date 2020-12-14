@@ -3,6 +3,7 @@ import HighchartsReact from "highcharts-react-official";
 
 import LoadingPie from "../../components/LoadingPie";
 import VolumePie from "./VolumePie";
+import ExchangeInfo from "./ExchangeInfo";
 import useCoinData from "./useCoinData";
 import colors from "../../utils/colors";
 
@@ -26,12 +27,9 @@ const Cryptocurrency = ({}) => {
   }, [selectedCoin]);
 
   const setupCoinList = () => {
-    console.log("data");
-    console.log(data);
     const coinsList = data.map(coin => coinName(coin[0].pair));
     setCoins(coinsList);
     setSelectedCoin(coinsList[0]);
-    return coinsList[0];
   };
 
   const setupExchangesList = () => {
@@ -44,7 +42,7 @@ const Cryptocurrency = ({}) => {
     });
     const exchangesSet = new Set([...exchanges, ...unrecordedExchanges]);
     setExchanges(exchangesSet);
-    return exchangesSet;
+    setSelectedExchange([...exchangesSet][0]);
   };
 
   const assignColorsToExchanges = () => {
@@ -75,7 +73,6 @@ const Cryptocurrency = ({}) => {
       });
     });
     setExchangeStats(newExchangeStats);
-    return newExchangeStats;
   };
 
   const prepPieChartData = () => {
@@ -98,7 +95,9 @@ const Cryptocurrency = ({}) => {
           return {
             name: exchange,
             y: parseFloat((volume * 100).toFixed(2)),
-            color
+            color,
+            selected: exchange === selectedExchange,
+            sliced: exchange === selectedExchange
           };
         })
         .filter(item => item.y > 0)
@@ -111,31 +110,10 @@ const Cryptocurrency = ({}) => {
     addInfoToExchanges();
   }
 
-  const stats = [];
-  exchanges.forEach(exchange => {
-    const volume =
-      exchangeStats[exchange] &&
-      exchangeStats[exchange][selectedCoin] &&
-      exchangeStats[exchange][selectedCoin].volume;
-    const price =
-      exchangeStats[exchange] &&
-      exchangeStats[exchange][selectedCoin] &&
-      exchangeStats[exchange][selectedCoin].price;
-    const volumePercentage =
-      exchangeStats[exchange] &&
-      exchangeStats[exchange][selectedCoin] &&
-      exchangeStats[exchange][selectedCoin].volumePercentage;
-    if (volume || price) {
-      stats.push(
-        <div>
-          <div>{exchange}</div>
-          <div>Volume: {volume}</div>
-          <div>Price: {price}</div>
-          <div>Volume Percentage: {volumePercentage}</div>
-        </div>
-      );
-    }
-  });
+  const selectedExchangeInfo =
+    (exchangeStats[selectedExchange] &&
+      exchangeStats[selectedExchange][selectedCoin]) ||
+    {};
 
   return (
     <div>
@@ -153,8 +131,10 @@ const Cryptocurrency = ({}) => {
           <h5>Compiling data from APIs...</h5>
         )}
       </ul>
-      <div className="pieContainer">
+      <h2 className="volumeTitle">Exchange Volume Distribution</h2>
+      <div className="volumeRow">
         <VolumePie data={volumePieData} selectExchange={setSelectedExchange} />
+        <ExchangeInfo info={selectedExchangeInfo} name={selectedExchange} />
       </div>
     </div>
   );

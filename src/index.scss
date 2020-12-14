@@ -53,6 +53,10 @@ body {
 
       }
 
+      .volumeTitle {
+        text-align: center;
+      }
+
       .volumeRow {
         display: flex;
         flex-flow: row wrap;
@@ -63,12 +67,24 @@ body {
         width: 400px;
         height: 400px;
         padding: 25px;
+        position: relative;
       }
 
-      .exchangeStats {
+      .exchangeInfoContainer {
         width: 400px;
         height: 400px;
         padding: 25px;
+        h3 {
+          padding: 10px;
+          color: #fff;
+        }
+
+        ul {
+          list-style-type: none;
+          line-height: 44px;
+          margin: 0;
+          padding: 0;
+        }
       }
     }
   }
