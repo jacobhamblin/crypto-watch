@@ -9,8 +9,6 @@ import colors from "../../utils/colors";
 
 const Cryptocurrency = ({}) => {
   const { data, isError, isLoading } = useCoinData();
-  // const data = {}
-  // const isLoading = true;
 
   const [coins, setCoins] = useState([]);
   const [selectedCoin, setSelectedCoin] = useState("");
