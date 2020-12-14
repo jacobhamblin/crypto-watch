@@ -2,10 +2,17 @@ import React from "react";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 
+import LoadingPie from "../../components/LoadingPie";
 import colors from "../../utils/colors";
 
 export default ({ data, selectExchange }) => {
   const options = {
+    chart: {
+      plotBackgroundColor: null,
+      plotBorderWidth: null,
+      plotShadow: false,
+      type: "pie"
+    },
     title: {
       text: "Exchange Volume"
     },
@@ -17,7 +24,7 @@ export default ({ data, selectExchange }) => {
         cursor: "pointer",
         dataLabels: {
           enabled: true,
-          format: "<b>{point.name}</b>: {point.percentage:.1f} %"
+          format: "<b>{point.name}</b>"
         }
       }
     },
@@ -26,19 +33,23 @@ export default ({ data, selectExchange }) => {
     },
     series: [
       {
-        name: "Exchanges",
+        name: "Volume",
         data,
-        size: "60%",
+        size: "100%",
         dataLabels: {
           formatter: function() {
             return this.y > 5 ? this.name : null;
           },
           color: "#ffffff",
-          distance: -30
+          distance: -20
         }
       }
     ]
   };
 
-  return <HighchartsReact options={options} highcharts={Highcharts} />;
+  return data ? (
+    <HighchartsReact options={options} highcharts={Highcharts} />
+  ) : (
+    <LoadingPie />
+  );
 };

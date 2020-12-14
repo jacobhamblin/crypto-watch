@@ -8,20 +8,25 @@ import colors from "../../utils/colors";
 
 const Cryptocurrency = ({}) => {
   const { data, isError, isLoading } = useCoinData();
-  console.log(data);
 
   const [coins, setCoins] = useState([]);
   const [selectedCoin, setSelectedCoin] = useState("");
   const [selectedExchange, setSelectedExchange] = useState([]);
   const [exchanges, setExchanges] = useState(new Set());
   const [exchangeStats, setExchangeStats] = useState({});
+  const [volumePieData, setVolumePieData] = useState({});
 
   const coinName = pair => pair.match(/(\w+)\/USD/)[1];
+
+  useEffect(() => {
+    prepPieChartData();
+  }, [selectedCoin]);
 
   const setupCoinList = () => {
     const coinsList = data.map(coin => coinName(coin[0].pair));
     setCoins(coinsList);
     setSelectedCoin(coinsList[0]);
+    return coinsList[0];
   };
 
   const setupExchangesList = () => {
@@ -38,10 +43,10 @@ const Cryptocurrency = ({}) => {
   };
 
   const addInfoToExchanges = () => {
-    let i = 0;
     const newExchangeStats = {};
     data.forEach(coin => {
       let totalVolume = 0;
+      let i = 0;
       coin.forEach(exchange => {
         totalVolume += exchange.quotes?.USD?.volume_24h;
         const exchangeInfo = newExchangeStats[exchange.exchange_id] || {};
@@ -62,35 +67,37 @@ const Cryptocurrency = ({}) => {
     return newExchangeStats;
   };
 
-  const prepPieChartData = (exchangesSet, newExchangeStats) => {
-    let data = [...exchangesSet];
-    console.log("exchangessss");
-    console.log(exchangesSet);
-    const thing = data.map(exchange => {
-      console.log(exchange);
-      console.log(newExchangeStats);
-      console.log(newExchangeStats[exchange]);
-      return {
-        name: exchange,
-        y: parseFloat(
-          (newExchangeStats[exchange][selectedCoin] * 100).toFixed(2)
-        ),
-        color: newExchangeStats[exchange][selectedCoin]["color"]
-      };
-    });
-    console.log("data");
-    console.log(thing);
-    return thing;
+  const prepPieChartData = () => {
+    let data = [...exchanges];
+    setVolumePieData(
+      data
+        .map(exchange => {
+          console.log(`exchangestats exchange ${exchangeStats[exchange]}`);
+          console.log(`exchange ${exchange} coin ${selectedCoin}`);
+          const volume =
+            (exchangeStats[exchange] &&
+              exchangeStats[exchange][selectedCoin] &&
+              exchangeStats[exchange][selectedCoin].volumePercentage) ||
+            0;
+          const color =
+            (exchangeStats[exchange] &&
+              exchangeStats[exchange][selectedCoin] &&
+              exchangeStats[exchange][selectedCoin].color) ||
+            "#000";
+          return {
+            name: exchange,
+            y: parseFloat((volume * 100).toFixed(2)),
+            color
+          };
+        })
+        .filter(item => item.y > 0)
+    );
   };
 
-  let pieData;
   if (!coins.length && data.length) {
-    setupCoinList();
+    const newSelectedCoin = setupCoinList();
     const exchangesSet = setupExchangesList();
     const newExchangeStats = addInfoToExchanges();
-    pieData = prepPieChartData(exchangesSet, newExchangeStats);
-    console.log("piedata");
-    console.log(pieData);
   }
 
   const stats = [];
@@ -119,8 +126,6 @@ const Cryptocurrency = ({}) => {
     }
   });
 
-  console.log(pieData);
-
   return isLoading ? (
     <div>
       Compiling data from APIs...
@@ -129,17 +134,21 @@ const Cryptocurrency = ({}) => {
   ) : (
     <div>
       <ul className="coinTabs">
-        {coins.map(coin => (
-          <li
-            onClick={() => setSelectedCoin(coin)}
-            className={selectedCoin === coin && "selected"}
-          >
-            {coin}
-          </li>
-        ))}
+        {coins ? (
+          coins.map(coin => (
+            <li
+              onClick={() => setSelectedCoin(coin)}
+              className={selectedCoin === coin && "selected"}
+            >
+              {coin}
+            </li>
+          ))
+        ) : (
+          <h5>Compiling data from APIs...</h5>
+        )}
       </ul>
       <div>
-        <VolumePie data={pieData} selectExchange={setSelectedExchange} />
+        <VolumePie data={volumePieData} selectExchange={setSelectedExchange} />
       </div>
     </div>
   );
