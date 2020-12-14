@@ -52,6 +52,24 @@ body {
       .chartContainer {
 
       }
+
+      .volumeRow {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+      }
+
+      .pieContainer {
+        width: 400px;
+        height: 400px;
+        padding: 25px;
+      }
+
+      .exchangeStats {
+        width: 400px;
+        height: 400px;
+        padding: 25px;
+      }
     }
   }
 }

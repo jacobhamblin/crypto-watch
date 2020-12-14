@@ -147,7 +147,7 @@ const Cryptocurrency = ({}) => {
           <h5>Compiling data from APIs...</h5>
         )}
       </ul>
-      <div>
+      <div className="pieContainer">
         <VolumePie data={volumePieData} selectExchange={setSelectedExchange} />
       </div>
     </div>
