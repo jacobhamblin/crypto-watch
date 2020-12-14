@@ -36,14 +36,12 @@ const Cryptocurrency = ({}) => {
           return {
             name: exchange,
             y: parseFloat((volume * 100).toFixed(2)),
-            color,
-            selected: exchange === selectedExchange,
-            sliced: exchange === selectedExchange
+            color
           };
         })
         .filter(item => item.y > 0)
     );
-  }, [exchangeStats]);
+  }, [exchangeStats, selectedCoin]);
 
   const setupCoinList = () => {
     const coinsList = data.map(coin => coinName(coin[0].pair));
@@ -71,8 +69,6 @@ const Cryptocurrency = ({}) => {
     exchangesSet.forEach(exchange => {
       assignments[exchange] = colors[i++];
     });
-    console.log("assignments");
-    console.log(assignments);
     setExchangeColors(assignments);
   };
 
@@ -127,7 +123,11 @@ const Cryptocurrency = ({}) => {
       </ul>
       <h2 className="volumeTitle">Exchange Volume Distribution</h2>
       <div className="volumeRow">
-        <VolumePie data={volumePieData} selectExchange={setSelectedExchange} />
+        <VolumePie
+          data={volumePieData}
+          selectExchange={setSelectedExchange}
+          selected={selectedExchange}
+        />
         <ExchangeInfo info={selectedExchangeInfo} name={selectedExchange} />
       </div>
     </div>

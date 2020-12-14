@@ -5,7 +5,7 @@ import Highcharts from "highcharts";
 import LoadingPie from "../../components/LoadingPie";
 import colors from "../../utils/colors";
 
-export default ({ data, selectExchange }) => {
+export default ({ data, selectExchange, selected }) => {
   const options = {
     chart: {
       plotBackgroundColor: null,
@@ -18,7 +18,7 @@ export default ({ data, selectExchange }) => {
       pie: {
         shadow: false,
         center: ["50%", "50%"],
-        allowPointSelect: true,
+        allowPointSelect: false,
         cursor: "pointer",
         dataLabels: {
           enabled: true,
