@@ -8,10 +8,13 @@ import colors from "../../utils/colors";
 
 const Cryptocurrency = ({}) => {
   const { data, isError, isLoading } = useCoinData();
+  // const data = {}
+  // const isLoading = true;
 
   const [coins, setCoins] = useState([]);
   const [selectedCoin, setSelectedCoin] = useState("");
   const [selectedExchange, setSelectedExchange] = useState([]);
+  const [exchangeColors, setExchangeColors] = useState({});
   const [exchanges, setExchanges] = useState(new Set());
   const [exchangeStats, setExchangeStats] = useState({});
   const [volumePieData, setVolumePieData] = useState({});
@@ -23,6 +26,8 @@ const Cryptocurrency = ({}) => {
   }, [selectedCoin]);
 
   const setupCoinList = () => {
+    console.log("data");
+    console.log(data);
     const coinsList = data.map(coin => coinName(coin[0].pair));
     setCoins(coinsList);
     setSelectedCoin(coinsList[0]);
@@ -40,6 +45,12 @@ const Cryptocurrency = ({}) => {
     const exchangesSet = new Set([...exchanges, ...unrecordedExchanges]);
     setExchanges(exchangesSet);
     return exchangesSet;
+  };
+
+  const assignColorsToExchanges = () => {
+    const assignments = {};
+    let i = 0;
+    exchanges.forEach(exchange => {});
   };
 
   const addInfoToExchanges = () => {
@@ -95,9 +106,9 @@ const Cryptocurrency = ({}) => {
   };
 
   if (!coins.length && data.length) {
-    const newSelectedCoin = setupCoinList();
-    const exchangesSet = setupExchangesList();
-    const newExchangeStats = addInfoToExchanges();
+    setupCoinList();
+    setupExchangesList();
+    addInfoToExchanges();
   }
 
   const stats = [];
@@ -126,15 +137,10 @@ const Cryptocurrency = ({}) => {
     }
   });
 
-  return isLoading ? (
-    <div>
-      Compiling data from APIs...
-      <LoadingPie />
-    </div>
-  ) : (
+  return (
     <div>
       <ul className="coinTabs">
-        {coins ? (
+        {coins.length ? (
           coins.map(coin => (
             <li
               onClick={() => setSelectedCoin(coin)}

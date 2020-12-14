@@ -25,6 +25,15 @@ export default ({ data, selectExchange }) => {
         dataLabels: {
           enabled: true,
           format: "<b>{point.name}</b>"
+        },
+        events: {
+          click: function(event) {
+            console.log(this);
+            console.log("name");
+            console.log(this.name);
+            console.log(event);
+            selectExchange(this.name);
+          }
         }
       }
     },
@@ -47,7 +56,7 @@ export default ({ data, selectExchange }) => {
     ]
   };
 
-  return data ? (
+  return Object.keys(data).length ? (
     <HighchartsReact options={options} highcharts={Highcharts} />
   ) : (
     <LoadingPie />
