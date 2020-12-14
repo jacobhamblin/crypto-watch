@@ -1,9 +1,9 @@
 import React from "react";
 
 export default ({ name, info }) => {
-  console.log(`name ${name}`);
-  console.log(`info ${info}`);
   const { volume, price, color } = info;
+  console.log("color");
+  console.log(color);
 
   return (
     <div className="exchangeInfoContainer">

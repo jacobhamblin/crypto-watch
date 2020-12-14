@@ -49,10 +49,6 @@ body {
         }
       }
 
-      .chartContainer {
-
-      }
-
       .volumeTitle {
         text-align: center;
       }
@@ -71,19 +67,26 @@ body {
       }
 
       .exchangeInfoContainer {
-        width: 400px;
-        height: 400px;
-        padding: 25px;
+        width: 350px;
+        height: 375px;
+        margin-left: 25px;
+        margin-right: 25px;
+        margin-top: 25px;
+        padding-bottom: 25px;
+        border: 1px solid #000;
+
         h3 {
           padding: 10px;
           color: #fff;
+          margin: 0;
+          border-bottom: 1px solid #000;
         }
 
         ul {
           list-style-type: none;
           line-height: 44px;
-          margin: 0;
           padding: 0;
+          padding-left: 10px;
         }
       }
     }

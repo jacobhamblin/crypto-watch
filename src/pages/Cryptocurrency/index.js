@@ -15,16 +15,35 @@ const Cryptocurrency = ({}) => {
   const [coins, setCoins] = useState([]);
   const [selectedCoin, setSelectedCoin] = useState("");
   const [selectedExchange, setSelectedExchange] = useState([]);
-  const [exchangeColors, setExchangeColors] = useState({});
   const [exchanges, setExchanges] = useState(new Set());
   const [exchangeStats, setExchangeStats] = useState({});
   const [volumePieData, setVolumePieData] = useState({});
+  const [exchangeColors, setExchangeColors] = useState({});
 
   const coinName = pair => pair.match(/(\w+)\/USD/)[1];
 
   useEffect(() => {
-    prepPieChartData();
-  }, [selectedCoin]);
+    let data = [...exchanges];
+    setVolumePieData(
+      data
+        .map(exchange => {
+          const volume =
+            (exchangeStats[exchange] &&
+              exchangeStats[exchange][selectedCoin] &&
+              exchangeStats[exchange][selectedCoin].volumePercentage) ||
+            0;
+          const color = exchangeColors[exchange];
+          return {
+            name: exchange,
+            y: parseFloat((volume * 100).toFixed(2)),
+            color,
+            selected: exchange === selectedExchange,
+            sliced: exchange === selectedExchange
+          };
+        })
+        .filter(item => item.y > 0)
+    );
+  }, [exchangeStats]);
 
   const setupCoinList = () => {
     const coinsList = data.map(coin => coinName(coin[0].pair));
@@ -43,26 +62,31 @@ const Cryptocurrency = ({}) => {
     const exchangesSet = new Set([...exchanges, ...unrecordedExchanges]);
     setExchanges(exchangesSet);
     setSelectedExchange([...exchangesSet][0]);
+    assignColorsToExchanges(exchangesSet);
   };
 
-  const assignColorsToExchanges = () => {
+  const assignColorsToExchanges = exchangesSet => {
     const assignments = {};
     let i = 0;
-    exchanges.forEach(exchange => {});
+    exchangesSet.forEach(exchange => {
+      assignments[exchange] = colors[i++];
+    });
+    console.log("assignments");
+    console.log(assignments);
+    setExchangeColors(assignments);
   };
 
-  const addInfoToExchanges = () => {
+  useEffect(() => {
     const newExchangeStats = {};
     data.forEach(coin => {
       let totalVolume = 0;
-      let i = 0;
       coin.forEach(exchange => {
         totalVolume += exchange.quotes?.USD?.volume_24h;
         const exchangeInfo = newExchangeStats[exchange.exchange_id] || {};
         exchangeInfo[coinName(exchange.pair)] = {
-          volume: exchange.quotes?.USD?.volume_24h,
-          price: exchange.quotes?.USD?.price,
-          color: colors[i++]
+          volume: parseFloat(exchange.quotes?.USD?.volume_24h?.toFixed(2)),
+          price: parseFloat(exchange.quotes?.USD?.price?.toFixed(2)),
+          color: exchangeColors[exchange.exchange_id]
         };
         newExchangeStats[exchange.exchange_id] = exchangeInfo;
       });
@@ -73,41 +97,11 @@ const Cryptocurrency = ({}) => {
       });
     });
     setExchangeStats(newExchangeStats);
-  };
-
-  const prepPieChartData = () => {
-    let data = [...exchanges];
-    setVolumePieData(
-      data
-        .map(exchange => {
-          console.log(`exchangestats exchange ${exchangeStats[exchange]}`);
-          console.log(`exchange ${exchange} coin ${selectedCoin}`);
-          const volume =
-            (exchangeStats[exchange] &&
-              exchangeStats[exchange][selectedCoin] &&
-              exchangeStats[exchange][selectedCoin].volumePercentage) ||
-            0;
-          const color =
-            (exchangeStats[exchange] &&
-              exchangeStats[exchange][selectedCoin] &&
-              exchangeStats[exchange][selectedCoin].color) ||
-            "#000";
-          return {
-            name: exchange,
-            y: parseFloat((volume * 100).toFixed(2)),
-            color,
-            selected: exchange === selectedExchange,
-            sliced: exchange === selectedExchange
-          };
-        })
-        .filter(item => item.y > 0)
-    );
-  };
+  }, [exchanges, exchangeColors]);
 
   if (!coins.length && data.length) {
     setupCoinList();
     setupExchangesList();
-    addInfoToExchanges();
   }
 
   const selectedExchangeInfo =
