@@ -14,7 +14,7 @@ const Cryptocurrency = ({}) => {
 
   const [coins, setCoins] = useState([]);
   const [selectedCoin, setSelectedCoin] = useState("");
-  const [selectedExchange, setSelectedExchange] = useState([]);
+  const [selectedExchange, setSelectedExchange] = useState("");
   const [exchanges, setExchanges] = useState(new Set());
   const [exchangeStats, setExchangeStats] = useState({});
   const [volumePieData, setVolumePieData] = useState({});
