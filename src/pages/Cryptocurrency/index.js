@@ -150,6 +150,7 @@ const Cryptocurrency = ({}) => {
           name={selectedExchange}
         />
       </div>
+      <h2 className="volumeTitle">Price Comparison</h2>
       <div className="priceRow">
         <PriceBar
           data={priceBarData}
