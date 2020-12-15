@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/crypto-watch/static/css/main.6e9ae021.chunk.css",
-    "main.js": "/crypto-watch/static/js/main.c87afaa9.chunk.js",
-    "main.js.map": "/crypto-watch/static/js/main.c87afaa9.chunk.js.map",
+    "main.css": "/crypto-watch/static/css/main.53c61c4e.chunk.css",
+    "main.js": "/crypto-watch/static/js/main.c0b9d7f1.chunk.js",
+    "main.js.map": "/crypto-watch/static/js/main.c0b9d7f1.chunk.js.map",
     "runtime-main.js": "/crypto-watch/static/js/runtime-main.97ac54b8.js",
     "runtime-main.js.map": "/crypto-watch/static/js/runtime-main.97ac54b8.js.map",
-    "static/js/2.e758841b.chunk.js": "/crypto-watch/static/js/2.e758841b.chunk.js",
-    "static/js/2.e758841b.chunk.js.map": "/crypto-watch/static/js/2.e758841b.chunk.js.map",
+    "static/js/2.a70fcf2f.chunk.js": "/crypto-watch/static/js/2.a70fcf2f.chunk.js",
+    "static/js/2.a70fcf2f.chunk.js.map": "/crypto-watch/static/js/2.a70fcf2f.chunk.js.map",
     "index.html": "/crypto-watch/index.html",
-    "precache-manifest.4ebb68950a76931e609e39ae6c780c46.js": "/crypto-watch/precache-manifest.4ebb68950a76931e609e39ae6c780c46.js",
+    "precache-manifest.a8ccdec94e10dbce472bafe1b21d079f.js": "/crypto-watch/precache-manifest.a8ccdec94e10dbce472bafe1b21d079f.js",
     "service-worker.js": "/crypto-watch/service-worker.js",
-    "static/css/main.6e9ae021.chunk.css.map": "/crypto-watch/static/css/main.6e9ae021.chunk.css.map",
-    "static/js/2.e758841b.chunk.js.LICENSE.txt": "/crypto-watch/static/js/2.e758841b.chunk.js.LICENSE.txt",
-    "static/js/main.c87afaa9.chunk.js.LICENSE.txt": "/crypto-watch/static/js/main.c87afaa9.chunk.js.LICENSE.txt",
+    "static/css/main.53c61c4e.chunk.css.map": "/crypto-watch/static/css/main.53c61c4e.chunk.css.map",
+    "static/js/2.a70fcf2f.chunk.js.LICENSE.txt": "/crypto-watch/static/js/2.a70fcf2f.chunk.js.LICENSE.txt",
+    "static/js/main.c0b9d7f1.chunk.js.LICENSE.txt": "/crypto-watch/static/js/main.c0b9d7f1.chunk.js.LICENSE.txt",
     "static/media/About.md": "/crypto-watch/static/media/About.b45200b5.md"
   },
   "entrypoints": [
     "static/js/runtime-main.97ac54b8.js",
-    "static/js/2.e758841b.chunk.js",
-    "static/css/main.6e9ae021.chunk.css",
-    "static/js/main.c87afaa9.chunk.js"
+    "static/js/2.a70fcf2f.chunk.js",
+    "static/css/main.53c61c4e.chunk.css",
+    "static/js/main.c0b9d7f1.chunk.js"
   ]
 }
