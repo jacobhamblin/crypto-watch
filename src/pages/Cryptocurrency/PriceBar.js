@@ -56,8 +56,7 @@ export default ({ data, selectExchange, selected }) => {
     tooltip: {
       crosshairs: false,
       shared: true,
-      pointFormat: "{point.y:,.0f}",
-      valuePrefix: "$"
+      pointFormat: "${point.y:,.2f}"
     },
     series: [
       {
