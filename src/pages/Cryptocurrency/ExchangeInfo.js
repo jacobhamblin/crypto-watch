@@ -7,24 +7,32 @@ export default ({ name, info, coin }) => {
 
   const firstLI = volume ? (
     <li>
-      24h Volume: {numberWithCommas(volume)} {coin}
+      24h Volume:{" "}
+      <span className="bold">
+        {numberWithCommas(volume)} {coin}
+      </span>
     </li>
   ) : (
     <li>
-      <RandomCharacters numChars={22} />
+      <RandomCharacters numChars={30} />
     </li>
   );
   const secondLI = volumePercentage ? (
     <li>
-      Volume % of total: {parseFloat((volumePercentage * 100).toFixed(2))}%
+      Volume % of total:{" "}
+      <span className="bold">
+        {parseFloat((volumePercentage * 100).toFixed(2))}%
+      </span>
     </li>
   ) : (
     <li>
-      <RandomCharacters numChars={25} />
+      <RandomCharacters numChars={21} />
     </li>
   );
   const thirdLI = price ? (
-    <li>Price: ${numberWithCommas(price)}</li>
+    <li>
+      Price: <span className="bold">${numberWithCommas(price)}</span>
+    </li>
   ) : (
     <li>
       <RandomCharacters numChars={13} />

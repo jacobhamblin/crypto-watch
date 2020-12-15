@@ -7,12 +7,14 @@ function curPathStyle() {
   let hist, crypto, about;
   const bold = { fontWeight: "bold" };
   const location = window.location.href;
-  if (location.includes('markets')) {
+  if (location.includes("markets")) {
     crypto = bold;
-  } else if (location.includes('about')) {
+  } else if (location.includes("about")) {
     about = bold;
-  } else {
+  } else if (location.includes("history")) {
     hist = bold;
+  } else {
+    crypto = bold;
   }
 
   return { hist, crypto, about };
