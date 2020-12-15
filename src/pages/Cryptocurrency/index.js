@@ -126,7 +126,11 @@ const Cryptocurrency = ({}) => {
           selectExchange={setSelectedExchange}
           selected={selectedExchange}
         />
-        <ExchangeInfo info={selectedExchangeInfo} name={selectedExchange} />
+        <ExchangeInfo
+          coin={selectedCoin}
+          info={selectedExchangeInfo}
+          name={selectedExchange}
+        />
       </div>
     </div>
   );
