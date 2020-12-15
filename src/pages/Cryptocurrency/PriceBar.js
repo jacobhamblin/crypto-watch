@@ -4,6 +4,11 @@ import Highcharts from "highcharts";
 
 import LoadingPie from "../../components/LoadingPie";
 import colors from "../../utils/colors";
+Highcharts.setOptions({
+  lang: {
+    thousandsSep: ","
+  }
+});
 
 export default ({ data, selectExchange, selected }) => {
   const options = {
@@ -11,11 +16,11 @@ export default ({ data, selectExchange, selected }) => {
       plotBackgroundColor: null,
       plotBorderWidth: null,
       plotShadow: false,
-      type: "pie"
+      type: "scatter"
     },
     title: { text: "" },
     plotOptions: {
-      pie: {
+      scatter: {
         shadow: false,
         center: ["50%", "50%"],
         allowPointSelect: false,
@@ -26,16 +31,40 @@ export default ({ data, selectExchange, selected }) => {
             if (event.point?.name) selectExchange(event.point.name);
           }
         }
+      },
+      series: {
+        label: {
+          connectorAllowed: false
+        }
+      }
+    },
+    xAxis: {
+      title: {
+        enabled: true,
+        text: "Exchange"
+      },
+      type: "category",
+      startOnTick: true,
+      endOnTick: true,
+      showLastLabel: true
+    },
+    yAxis: {
+      title: {
+        text: "Price (USD)"
       }
     },
     tooltip: {
-      valueSuffix: "%"
+      crosshairs: false,
+      shared: true,
+      pointFormat: "{point.y:,.0f}",
+      valuePrefix: "$"
     },
     series: [
       {
-        name: "Volume",
+        name: "Price",
         data,
         size: "100%",
+        showInLegend: false,
         dataLabels: {
           formatter: function() {
             return this.y > 5 ? this.name : null;
@@ -48,7 +77,7 @@ export default ({ data, selectExchange, selected }) => {
   };
 
   return (
-    <div className="pieContainer">
+    <div className="columnContainer">
       {Object.keys(data).length ? (
         <HighchartsReact options={options} highcharts={Highcharts} />
       ) : (

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import HighchartsReact from "highcharts-react-official";
 
 import LoadingPie from "../../components/LoadingPie";
 import VolumePie from "./VolumePie";
+import PriceBar from "./PriceBar";
 import ExchangeInfo from "./ExchangeInfo";
 import useCoinData from "./useCoinData";
 import colors from "../../utils/colors";
@@ -16,6 +16,7 @@ const Cryptocurrency = ({}) => {
   const [exchanges, setExchanges] = useState(new Set());
   const [exchangeStats, setExchangeStats] = useState({});
   const [volumePieData, setVolumePieData] = useState({});
+  const [priceBarData, setPriceBarData] = useState({});
   const [exchangeColors, setExchangeColors] = useState({});
 
   const coinName = pair => pair.match(/(\w+)\/USD/)[1];
@@ -34,6 +35,23 @@ const Cryptocurrency = ({}) => {
           return {
             name: exchange,
             y: parseFloat((volume * 100).toFixed(2)),
+            color
+          };
+        })
+        .filter(item => item.y > 0)
+    );
+    setPriceBarData(
+      data
+        .map(exchange => {
+          const price =
+            (exchangeStats[exchange] &&
+              exchangeStats[exchange][selectedCoin] &&
+              exchangeStats[exchange][selectedCoin].price) ||
+            0;
+          const color = exchangeColors[exchange];
+          return {
+            name: exchange,
+            y: price,
             color
           };
         })
@@ -130,6 +148,13 @@ const Cryptocurrency = ({}) => {
           coin={selectedCoin}
           info={selectedExchangeInfo}
           name={selectedExchange}
+        />
+      </div>
+      <div className="priceRow">
+        <PriceBar
+          data={priceBarData}
+          selectExchange={setSelectedExchange}
+          selected={selectedExchange}
         />
       </div>
     </div>
