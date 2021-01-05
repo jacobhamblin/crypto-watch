@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a2325971632ff616fbfe1988b020a0e5",
+    "revision": "35c2690c572859f6bbc47a19e4a96baa",
     "url": "/crypto-watch/index.html"
   },
   {
