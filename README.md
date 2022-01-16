@@ -10,7 +10,7 @@ including:
 - A better dev toolset is now available in
   [create-react-app](https://reactjs.org/docs/create-a-new-react-app.html).
 
-![Preview of app](https://jacobhamblin.github.com/wdd330/previews/cryptowatch.gif)
+![Preview of app](https://jacobhamblin.github.io/wdd330/previews/cryptowatch.gif)
 
 ## Running locally
 
