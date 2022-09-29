@@ -70,6 +70,10 @@ body {
         height: 400px;
         padding: 25px;
         position: relative;
+
+        .highcharts-credits {
+          display: none !important;
+        }
       }
 
       .exchangeInfoContainer {
